@@ -11,7 +11,6 @@ import butterknife.OnClick;
 import ru.anit.weightcounting.R;
 import ru.anit.weightcounting.mvp.presenters.MainActivityPresenter;
 import ru.anit.weightcounting.mvp.views.MainActivityView;
-import ru.anit.weightcounting.ui.activityes.datail.DetailProductActivity;
 
 public class MainActivity extends BaseMvpActivity implements MainActivityView {
 

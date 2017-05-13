@@ -1,5 +1,8 @@
 package ru.anit.weightcounting.mvp.presenters;
 
+import android.content.IntentFilter;
+
+import ru.anit.weightcounting.api.BarcodeDataBroadcastReceiver;
 import ru.anit.weightcounting.mvp.model.entities.Product;
 import ru.anit.weightcounting.mvp.views.DetailProductView;
 
@@ -11,10 +14,22 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
 
     Product mProduct;
 
+
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
+
         getViewState().refresh();
+    }
+
+    public void onStart(){
+        IntentFilter intentFilter = new IntentFilter("DATA_SCAN");
+        getViewState().registerBarcodeReceiver();
+    }
+
+    public void onStop(){
+        getViewState().unregisterReceiver();
     }
 
     public DetailProductPresenter() {
@@ -26,12 +41,12 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     //**********************************************************************************************
     //  Dilog
 
-    public void refreshView(){
+    public void refreshView() {
         getViewState().refresh();
     }
 
     void showDilogName() {
-            getViewState().showDialogName(mProduct.getName());
+        getViewState().showDialogName(mProduct.getName());
     }
 
     void showDilogStartPosition() {
@@ -40,6 +55,10 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
 
     void showDilogFinishPosition() {
         getViewState().showDialogFinishPosition(null);
+    }
+
+    public void clickCoefficient() {
+        getViewState().showDialogCoefficient(null);
     }
 
 
@@ -54,28 +73,32 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
         showDilogStartPosition();
     }
 
-    public void finishPosition() {
+    public void clickFinishPosition() {
         showDilogFinishPosition();
     }
 
 
     public String getName() {
-
-        String title = "Наименование: ";
-        return title + mProduct.getName();
+        return mProduct.getName();
     }
 
-    public String getStart() {
-
-        String title = "Начальная позиция: ";
-        return title + mProduct.getStartPositionBarcodeWight();
+    public int getStart() {
+        return mProduct.getStartPositionBarcodeWight();
     }
 
 
-    public String getFinish() {
-        String title = "Конечная позиция: ";
-        return title + mProduct.getFinishPositionBarcodeWight();
+    public int getFinish() {
+        return mProduct.getFinishPositionBarcodeWight();
     }
+
+    public float getCoefficient() {
+        return mProduct.getCoefficient();
+    }
+
+    public String getInitialBarcode() {
+        return mProduct.getInitialBarcode();
+    }
+
 
     public void setName(String name) {
         mProduct.setName(name);
@@ -83,16 +106,46 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     }
 
     public void setStartPosition(String s) {
-        mProduct.setStartPositionBarcodeWight(s);
+        int anInt = 0;
+        try {
+            anInt = Integer.parseInt(s) -1 ;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        mProduct.setStartPositionBarcodeWight(anInt);
         refreshView();
 
     }
 
     public void setFinishPosition(String s) {
-        mProduct.setFinishPositionBarcodeWight(s);
+
+        int anInt = 0;
+        try {
+            anInt = Integer.parseInt(s) -1;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        mProduct.setFinishPositionBarcodeWight(anInt);
         refreshView();
     }
 
 
+    public void setCoefficient(String s) {
 
+        float v = 0;
+        try {
+            v = Float.parseFloat(s);
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        mProduct.setCoefficient(v);
+        refreshView();
+    }
+
+    public void setInitBarcode(String initBarcode) {
+        mProduct.setInitialBarcode(initBarcode);
+        refreshView();
+    }
 }

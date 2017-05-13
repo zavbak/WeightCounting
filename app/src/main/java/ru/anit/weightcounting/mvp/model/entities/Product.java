@@ -7,9 +7,10 @@ package ru.anit.weightcounting.mvp.model.entities;
 public class Product {
     long   id;
     String name;
-    String startPositionBarcodeWight;
-    String finishPositionBarcodeWight;
-    String coefficient;
+    int startPositionBarcodeWight;
+    int finishPositionBarcodeWight;
+    float coefficient;
+    String initialBarcode;
 
     public long getId() {
         return id;
@@ -27,27 +28,35 @@ public class Product {
         this.name = name;
     }
 
-    public String getStartPositionBarcodeWight() {
+    public int getStartPositionBarcodeWight() {
         return startPositionBarcodeWight;
     }
 
-    public void setStartPositionBarcodeWight(String startPositionBarcodeWight) {
+    public void setStartPositionBarcodeWight(int startPositionBarcodeWight) {
         this.startPositionBarcodeWight = startPositionBarcodeWight;
     }
 
-    public String getFinishPositionBarcodeWight() {
+    public int getFinishPositionBarcodeWight() {
         return finishPositionBarcodeWight;
     }
 
-    public void setFinishPositionBarcodeWight(String finishPositionBarcodeWight) {
+    public void setFinishPositionBarcodeWight(int finishPositionBarcodeWight) {
         this.finishPositionBarcodeWight = finishPositionBarcodeWight;
     }
 
-    public String getCoefficient() {
+    public float getCoefficient() {
         return coefficient;
     }
 
-    public void setCoefficient(String coefficient) {
+    public void setCoefficient(float coefficient) {
         this.coefficient = coefficient;
+    }
+
+    public String getInitialBarcode() {
+        return initialBarcode;
+    }
+
+    public void setInitialBarcode(String initialBarcode) {
+        this.initialBarcode = initialBarcode;
     }
 }

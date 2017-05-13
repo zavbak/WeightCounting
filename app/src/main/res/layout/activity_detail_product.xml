@@ -4,7 +4,29 @@
              android:layout_height="match_parent"
               android:orientation="vertical"
 
-             tools:context="ru.anit.weightcounting.ui.activityes.datail.DetailProductActivity">
+             tools:context="ru.anit.weightcounting.ui.activityes.DetailProductActivity">
+
+    <TextView
+        android:id="@+id/tv_initial_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:text="Initial barcode"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:text="message"
+        android:textSize="16dp"/>
 
 
     <TextView
@@ -16,7 +38,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginLeft="16dp"
         android:text="Name"
-        android:textSize="24dp"/>
+        android:textSize="16dp"/>
 
     <TextView
         android:id="@+id/tv_start"
@@ -27,7 +49,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginLeft="16dp"
         android:text="Start"
-        android:textSize="24dp"/>
+        android:textSize="16dp"/>
 
     <TextView
         android:id="@+id/tv_finish"
@@ -37,7 +59,17 @@
         android:layout_marginRight="8dp"
         android:layout_marginLeft="16dp"
         android:text="Finish"
-        android:textSize="24dp"/>
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/tv_coefficient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:text="Coefficient"
+        android:textSize="16dp"/>
 
 
 
