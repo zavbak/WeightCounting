@@ -14,7 +14,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import ru.anit.weightcounting.api.BarcodeDataBroadcastReceiver;
+import io.realm.Realm;
+import ru.anit.weightcounting.api.barcode.BarcodeDataBroadcastReceiver;
 import ru.anit.weightcounting.mvp.views.DetailProductView;
 import ru.anit.weightcounting.mvp.presenters.DetailProductPresenter;
 
@@ -48,6 +49,8 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
 
     @BindView(R.id.tv_message)
     TextView tvMessage;
+
+
 
 
     public static Intent getIntent(final Context context) {
@@ -134,13 +137,15 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
 
         tvMessage.setText(message);
 
-
-
-
     }
 
     //**********************************************************************************************
     //                              event
+
+    @OnClick(R.id.bt_save)
+    void onClickBtSave(){
+        mPresenter.saveProduct();
+    }
 
     @OnClick(R.id.tv_name)
     void onClickTvName(){
@@ -210,6 +215,11 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
     @Override
     public void unregisterReceiver() {
         unregisterReceiver(mBarcodeDataBroadcastReceiver);
+    }
+
+    @Override
+    public void exit() {
+        finish();
     }
     //**********************************************************************************************
 

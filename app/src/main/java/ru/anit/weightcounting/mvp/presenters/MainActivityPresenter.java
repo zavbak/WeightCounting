@@ -9,7 +9,7 @@ import ru.anit.weightcounting.mvp.views.MainActivityView;
 
 @InjectViewState
 public class MainActivityPresenter extends MvpPresenter<MainActivityView> {
-    public void showDtailProducrion(long id){
-        getViewState().showDetailProduct(1);
+    public void showDtailProducrion(String id){
+        getViewState().showDetailProduct(id);
     }
 }

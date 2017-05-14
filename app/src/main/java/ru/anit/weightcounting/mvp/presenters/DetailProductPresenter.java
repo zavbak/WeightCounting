@@ -2,7 +2,8 @@ package ru.anit.weightcounting.mvp.presenters;
 
 import android.content.IntentFilter;
 
-import ru.anit.weightcounting.api.BarcodeDataBroadcastReceiver;
+import ru.anit.weightcounting.repository.db.SaveProdactRealm;
+import ru.anit.weightcounting.repository.db.SaveProduct;
 import ru.anit.weightcounting.mvp.model.entities.Product;
 import ru.anit.weightcounting.mvp.views.DetailProductView;
 
@@ -16,16 +17,20 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
 
 
 
+
+
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-
         getViewState().refresh();
     }
 
     public void onStart(){
         IntentFilter intentFilter = new IntentFilter("DATA_SCAN");
         getViewState().registerBarcodeReceiver();
+
+
+
     }
 
     public void onStop(){
@@ -35,6 +40,15 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     public DetailProductPresenter() {
         mProduct = new Product();
         mProduct.setName("Свинина Мираторг");
+    }
+
+
+    public void saveProduct(){
+
+        SaveProduct saveProductDB = new SaveProdactRealm();
+        saveProductDB.save(mProduct);
+        getViewState().exit();
+
     }
 
 

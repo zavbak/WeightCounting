@@ -26,5 +26,7 @@ public interface DetailProductView extends MvpView {
    void registerBarcodeReceiver();
    @StateStrategyType(SkipStrategy.class)
    void unregisterReceiver();
+   @StateStrategyType(SkipStrategy.class)
+   void exit();
 
 }

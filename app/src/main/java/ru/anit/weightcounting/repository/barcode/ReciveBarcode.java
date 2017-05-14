@@ -1,4 +1,4 @@
-package ru.anit.weightcounting.mvp.model.repository;
+package ru.anit.weightcounting.repository.barcode;
 
 /**
  * Взвращает barcode

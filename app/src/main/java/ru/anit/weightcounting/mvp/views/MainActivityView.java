@@ -7,5 +7,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 public interface MainActivityView extends MvpView {
     @StateStrategyType(OneExecutionStateStrategy.class)
-    void showDetailProduct(long id);
+    void showDetailProduct(String id);
 }

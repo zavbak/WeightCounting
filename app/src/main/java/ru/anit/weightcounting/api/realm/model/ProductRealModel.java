@@ -1,11 +1,13 @@
-package ru.anit.weightcounting.mvp.model.entities;
+package ru.anit.weightcounting.api.realm.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
+/**
+ * Created by user on 13.05.2017.
+ */
 
-public class Product extends RealmObject  {
-
+public class ProductRealModel extends RealmObject {
     @PrimaryKey
     private long id;
     private String name;
@@ -13,7 +15,6 @@ public class Product extends RealmObject  {
     private int finishPositionBarcodeWight;
     private float coefficient;
     private String initialBarcode;
-
 
     public long getId() {
         return id;

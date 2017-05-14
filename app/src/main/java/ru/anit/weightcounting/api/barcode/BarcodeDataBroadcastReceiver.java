@@ -1,10 +1,10 @@
-package ru.anit.weightcounting.api;
+package ru.anit.weightcounting.api.barcode;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import ru.anit.weightcounting.mvp.model.repository.ReciveBarcode;
+import ru.anit.weightcounting.repository.barcode.ReciveBarcode;
 
 
 public class BarcodeDataBroadcastReceiver extends BroadcastReceiver {
