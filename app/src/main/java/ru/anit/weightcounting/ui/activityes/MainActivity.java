@@ -1,5 +1,6 @@
 package ru.anit.weightcounting.ui.activityes;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -22,6 +23,8 @@ import ru.anit.weightcounting.mvp.views.MainActivityView;
 import ru.anit.weightcounting.repository.products.RepositoryProductsI;
 import ru.anit.weightcounting.repository.products.RepositoryProductsRealm;
 import ru.anit.weightcounting.ui.adapters.MyListAdapter;
+import ru.anit.weightcounting.ui.dialog.DialogCauntingBarcodeHelper;
+import ru.anit.weightcounting.ui.dialog.DialogHelper;
 import ru.anit.weightcounting.ui.fragments.DialogBarcodeFragment;
 
 public class MainActivity extends BaseMvpActivity implements MainActivityView {
@@ -68,8 +71,56 @@ public class MainActivity extends BaseMvpActivity implements MainActivityView {
 
     @OnClick(R.id.btTestBarcode)
     void onClickBtTestBarcode(){
-        DialogFragment dlg = DialogBarcodeFragment.getIntent("100","145311561651465");
-        dlg.show(getFragmentManager(),"DialogBarcodeFragment");
+
+        DialogCauntingBarcodeHelper.CallBackChoicePositive positiveChoise = (siets, weight) -> {};
+        DialogCauntingBarcodeHelper.CallBackChoiceNegative negativeChoise = () -> {};
+
+        Context context = this;
+
+        DialogCauntingBarcodeHelper.SettingsDialogBarcode settingsDialogBarcode =
+                new DialogCauntingBarcodeHelper.SettingsDialogBarcode() {
+                    @Override
+                    public Context getContext() {
+                        return context;
+                    }
+
+                    @Override
+                    public String getMessage() {
+                        return "Сообщение";
+                    }
+
+                    @Override
+                    public DialogCauntingBarcodeHelper.CallBackChoicePositive getCallBackChoicePositive() {
+                        return positiveChoise;
+                    }
+
+                    @Override
+                    public DialogCauntingBarcodeHelper.CallBackChoiceNegative getCallBackChoiceNegative() {
+                        return negativeChoise;
+                    }
+
+                    @Override
+                    public String getBarcode() {
+                        return "6545645564465";
+                    }
+
+                    @Override
+                    public String getSeats() {
+                        return "1";
+                    }
+
+                    @Override
+                    public String getWeight() {
+                        return "100";
+                    }
+                };
+
+
+        AlertDialog alertDialog = DialogCauntingBarcodeHelper.getDialogText(settingsDialogBarcode).create();
+
+        alertDialog.show();
+
+
     }
 
     @Override
