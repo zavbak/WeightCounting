@@ -3,9 +3,12 @@ package ru.anit.weightcounting.app;
 import android.app.Application;
 import android.content.Context;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import ru.anit.weightcounting.api.realm.RealmMigration;
+import ru.anit.weightcounting.mvp.model.entities.Product;
 
 
 /**
@@ -16,6 +19,8 @@ public class App extends Application {
 
 
     private static Context mAppContext;
+
+
 
     @Override
     public void onCreate() {
@@ -33,6 +38,7 @@ public class App extends Application {
                 .migration(new RealmMigration())
                 .build();
         Realm.setDefaultConfiguration(config);
+
 
     }
 

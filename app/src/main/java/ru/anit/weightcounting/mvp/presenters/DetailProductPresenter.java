@@ -2,8 +2,8 @@ package ru.anit.weightcounting.mvp.presenters;
 
 import android.content.IntentFilter;
 
-import ru.anit.weightcounting.repository.db.SaveProdactRealm;
-import ru.anit.weightcounting.repository.db.SaveProduct;
+import ru.anit.weightcounting.repository.products.RepositoryProductsI;
+import ru.anit.weightcounting.repository.products.RepositoryProductsRealm;
 import ru.anit.weightcounting.mvp.model.entities.Product;
 import ru.anit.weightcounting.mvp.views.DetailProductView;
 
@@ -15,9 +15,31 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
 
     Product mProduct;
 
+    RepositoryProductsI repositoryProducts;
 
 
+    public DetailProductPresenter() {
+        repositoryProducts = new RepositoryProductsRealm();
+    }
 
+
+    public void setProduct(String id) {
+
+        if(mProduct == null){
+            mProduct = new Product();
+
+            if (id != null) {
+                Product productRealm = repositoryProducts.getProductById(Long.parseLong(id));
+
+                mProduct.setId(productRealm.getId());
+                mProduct.setBarcode(productRealm.getBarcode());
+                mProduct.setName(productRealm.getName());
+                mProduct.setStartPositionBarcodeWight(productRealm.getStartPositionBarcodeWight());
+                mProduct.setFinishPositionBarcodeWight(productRealm.getFinishPositionBarcodeWight());
+                mProduct.setCoefficient(productRealm.getCoefficient());
+            }
+        }
+    }
 
     @Override
     protected void onFirstViewAttach() {
@@ -28,36 +50,23 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     public void onStart(){
         IntentFilter intentFilter = new IntentFilter("DATA_SCAN");
         getViewState().registerBarcodeReceiver();
-
-
-
     }
 
     public void onStop(){
         getViewState().unregisterReceiver();
     }
 
-    public DetailProductPresenter() {
-        mProduct = new Product();
-        mProduct.setName("Свинина Мираторг");
-    }
-
-
     public void saveProduct(){
-
-        SaveProduct saveProductDB = new SaveProdactRealm();
-        saveProductDB.save(mProduct);
+        repositoryProducts.save(mProduct);
         getViewState().exit();
-
     }
-
-
-    //**********************************************************************************************
-    //  Dilog
 
     public void refreshView() {
         getViewState().refresh();
     }
+
+    //**********************************************************************************************
+    //  Dilog
 
     void showDilogName() {
         getViewState().showDialogName(mProduct.getName());
@@ -71,16 +80,18 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
         getViewState().showDialogFinishPosition(null);
     }
 
-    public void clickCoefficient() {
-        getViewState().showDialogCoefficient(null);
+    void showDilogBarCode() {
+        getViewState().showDialogBarcode(null);
     }
-
 
     //**********************************************************************************************
     //  Event
 
     public void clickName() {
         showDilogName();
+    }
+    public void clickBarcode() {
+        showDilogBarCode();
     }
 
     public void clickStartPosition() {
@@ -91,17 +102,23 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
         showDilogFinishPosition();
     }
 
+    public void clickCoefficient() {
+        getViewState().showDialogCoefficient(null);
+    }
+
+
+    //**********************************************************************************************
+    //      get param Product
 
     public String getName() {
         return mProduct.getName();
     }
 
-    public int getStart() {
+    public int getStartPosition() {
         return mProduct.getStartPositionBarcodeWight();
     }
 
-
-    public int getFinish() {
+    public int getFinishPosition() {
         return mProduct.getFinishPositionBarcodeWight();
     }
 
@@ -110,9 +127,13 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     }
 
     public String getInitialBarcode() {
-        return mProduct.getInitialBarcode();
+        return mProduct.getBarcode();
     }
-
+    public String getId() {
+        return Long.toString(mProduct.getId());
+    }
+    //**********************************************************************************************
+    //      set param Product
 
     public void setName(String name) {
         mProduct.setName(name);
@@ -145,7 +166,6 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
         refreshView();
     }
 
-
     public void setCoefficient(String s) {
 
         float v = 0;
@@ -159,7 +179,9 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     }
 
     public void setInitBarcode(String initBarcode) {
-        mProduct.setInitialBarcode(initBarcode);
+        mProduct.setBarcode(initBarcode);
         refreshView();
     }
+
+
 }

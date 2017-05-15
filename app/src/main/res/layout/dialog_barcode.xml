@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+
+    <TextView
+        android:id="@+id/tvId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="id">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Продукт">
+    </TextView>
+
+    <TextView
+        android:id="@+id/tvBarcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Штрихкод">
+    </TextView>
+    <TextView
+        android:id="@+id/tvWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Вес"
+        >
+    </TextView>
+    <TextView
+        android:id="@+id/tvSeats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Мест">
+    </TextView>
+
+</LinearLayout>

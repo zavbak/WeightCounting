@@ -1,4 +1,4 @@
-package ru.anit.weightcounting.api.barcode;
+package ru.anit.weightcounting.repository.barcode;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

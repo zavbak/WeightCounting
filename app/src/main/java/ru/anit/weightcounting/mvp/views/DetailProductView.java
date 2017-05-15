@@ -21,6 +21,8 @@ public interface DetailProductView extends MvpView {
    void showDialogFinishPosition(String defaultStr);
    @StateStrategyType(SkipStrategy.class)
    void showDialogCoefficient(String defaultStr);
+   @StateStrategyType(SkipStrategy.class)
+   void showDialogBarcode(String defaultStr);
 
    @StateStrategyType(SkipStrategy.class)
    void registerBarcodeReceiver();

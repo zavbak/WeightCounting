@@ -14,8 +14,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.realm.Realm;
-import ru.anit.weightcounting.api.barcode.BarcodeDataBroadcastReceiver;
+import ru.anit.weightcounting.repository.barcode.BarcodeDataBroadcastReceiver;
 import ru.anit.weightcounting.mvp.views.DetailProductView;
 import ru.anit.weightcounting.mvp.presenters.DetailProductPresenter;
 
@@ -24,6 +23,7 @@ import ru.anit.weightcounting.R;
 import ru.anit.weightcounting.ui.dialog.DialogHelper;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 
 public class DetailProductActivity extends BaseMvpActivity implements DetailProductView {
 
@@ -31,6 +31,8 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
     DetailProductPresenter mPresenter;
 
     BarcodeDataBroadcastReceiver mBarcodeDataBroadcastReceiver;
+    @BindView(R.id.tv_id)
+    TextView tvId;
 
     @BindView(R.id.tv_initial_barcode)
     TextView tvInitialBarcode;
@@ -53,17 +55,23 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
 
 
 
-    public static Intent getIntent(final Context context) {
+    public static Intent getIntent(final Context context,String id) {
         Intent intent = new Intent(context, DetailProductActivity.class);
+        intent.putExtra("id",id);
         return intent;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_product);
         ButterKnife.bind(this);
+
+
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+
+        mPresenter.setProduct(id);
 
         mBarcodeDataBroadcastReceiver = new BarcodeDataBroadcastReceiver(barcode -> {mPresenter.setInitBarcode(barcode);});
     }
@@ -82,15 +90,15 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
 
     @Override
     public void refresh() {
-
+        String id = mPresenter.getId();
         String barcode = mPresenter.getInitialBarcode();
         String name = mPresenter.getName();
-        int start = mPresenter.getStart();
-        int finish = mPresenter.getFinish();
+        int start = mPresenter.getStartPosition();
+        int finish = mPresenter.getFinishPosition();
         float coef = mPresenter.getCoefficient();
 
-
-        tvInitialBarcode.setText("" + barcode);
+        tvId.setText("id: " + id);
+        tvInitialBarcode.setText("Штрих код: " + barcode);
         tvName.setText("Наименование: " + name);
         tvStart.setText("Начальная позиция: " + (start + 1));
         tvFinish.setText("Конечная позиция: " + (finish +1));
@@ -147,6 +155,11 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
         mPresenter.saveProduct();
     }
 
+    @OnClick(R.id.tv_initial_barcode)
+    void onClickBarcode(){
+        mPresenter.clickBarcode();
+    }
+
     @OnClick(R.id.tv_name)
     void onClickTvName(){
         mPresenter.clickName();
@@ -201,6 +214,14 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
     public void showDialogCoefficient(String defaultStr) {
         AlertDialog alertDialog = DialogHelper.getDialogFloat(this,"Введи коэффицент",defaultStr,
                 s -> mPresenter.setCoefficient(s),() -> {}).create();
+
+        alertDialog.show();
+    }
+
+    @Override
+    public void showDialogBarcode(String defaultStr) {
+        AlertDialog alertDialog = DialogHelper.getDialogFloat(this,"Введи штрихкод",defaultStr,
+                s -> mPresenter.setInitBarcode(s),() -> {}).create();
 
         alertDialog.show();
     }
