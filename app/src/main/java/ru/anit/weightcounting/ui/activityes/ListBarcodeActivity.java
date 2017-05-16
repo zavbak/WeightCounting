@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.anit.weightcounting.R;
 import ru.anit.weightcounting.mvp.presenters.ListBarcodePresenter;
 import ru.anit.weightcounting.mvp.views.ListBarcodeView;
@@ -44,4 +45,17 @@ public class ListBarcodeActivity extends BaseMvpActivity implements ListBarcodeV
 
         mBarcodeDataBroadcastReceiver = new BarcodeDataBroadcastReceiver(barcode -> {mPresenter.scanBarcode(barcode);});
     }
+
+    @OnClick(R.id.btTestBarcode)
+    void onClickBtTestBarcode(){
+        mPresenter.showBarcodePresenter("654561651651561");
+    }
+
+    @Override
+    public void showDialogBarcode() {
+
+    }
+
+
+
 }

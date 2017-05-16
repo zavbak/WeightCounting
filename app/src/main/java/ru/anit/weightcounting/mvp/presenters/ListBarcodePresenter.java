@@ -17,5 +17,10 @@ public class ListBarcodePresenter extends MvpPresenter<ListBarcodeView> {
     }
 
     public void scanBarcode(String barcode) {
+
+    }
+
+    public void showBarcodePresenter(String s) {
+
     }
 }

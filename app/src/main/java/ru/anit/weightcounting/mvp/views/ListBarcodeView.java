@@ -7,5 +7,5 @@ import com.arellomobile.mvp.MvpView;
  */
 
 public interface ListBarcodeView extends MvpView {
-
+    void showDialogBarcode();
 }

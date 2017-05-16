@@ -7,38 +7,27 @@
               android:padding="10dp">
 
 
-    <TextView
-        android:id="@+id/tvId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="id">
-    </TextView>
 
-    <TextView
-        android:id="@+id/tvProduct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Продукт">
-    </TextView>
 
-    <TextView
-        android:id="@+id/tvBarcode"
+    <EditText
+        android:layout_marginTop="16dp"
+        android:id="@+id/edSites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Штрихкод">
-    </TextView>
-    <TextView
-        android:id="@+id/tvWeight"
+        android:inputType="numberSigned">
+
+    </EditText>
+
+    <EditText
+        android:layout_marginTop="16dp"
+        android:id="@+id/edWeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Вес"
-        >
-    </TextView>
-    <TextView
-        android:id="@+id/tvSeats"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Мест">
-    </TextView>
+        android:text="weight"
+        android:inputType="numberDecimal">
+    </EditText>
+
+
+
 
 </LinearLayout>
