@@ -2,7 +2,6 @@ package ru.anit.weightcounting.mvp.model.entities;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.Required;
 
 
 public class Product extends RealmObject  {
@@ -11,8 +10,8 @@ public class Product extends RealmObject  {
     @PrimaryKey
     private long id;
     private String name;
-    private int startPositionBarcodeWight;
-    private int finishPositionBarcodeWight;
+    private int startPosition;
+    private int finishPosition;
     private float coefficient;
     private String barcode;
 
@@ -33,20 +32,20 @@ public class Product extends RealmObject  {
         this.name = name;
     }
 
-    public int getStartPositionBarcodeWight() {
-        return startPositionBarcodeWight;
+    public int getStartPosition() {
+        return startPosition;
     }
 
-    public void setStartPositionBarcodeWight(int startPositionBarcodeWight) {
-        this.startPositionBarcodeWight = startPositionBarcodeWight;
+    public void setStartPosition(int startPosition) {
+        this.startPosition = startPosition;
     }
 
-    public int getFinishPositionBarcodeWight() {
-        return finishPositionBarcodeWight;
+    public int getFinishPosition() {
+        return finishPosition;
     }
 
-    public void setFinishPositionBarcodeWight(int finishPositionBarcodeWight) {
-        this.finishPositionBarcodeWight = finishPositionBarcodeWight;
+    public void setFinishPosition(int finishPosition) {
+        this.finishPosition = finishPosition;
     }
 
     public float getCoefficient() {

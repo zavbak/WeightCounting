@@ -63,17 +63,7 @@ public class MainActivity extends BaseMvpActivity implements MainActivityView {
         mPresenter.showDtailProducrion(null);
     }
 
-    @OnClick(R.id.btTestBarcode)
-    void onClickBtTestBarcode(){
 
-        Context context = this;
-
-        DialogBarcodeCountingView barcodeCounting = new DialogBarcodeCounting(this);
-        barcodeCounting.setTitle("Подтвердите!");
-        barcodeCounting.setMessage(" ШК: 41531515156 \n\n (5-9) 5151 К = 0.01 \n\n Вес: 25 \n\n Свинина в упаковке (16)");
-        barcodeCounting.show();
-
-    }
 
     @Override
     public void showDetailProduct(String id) {

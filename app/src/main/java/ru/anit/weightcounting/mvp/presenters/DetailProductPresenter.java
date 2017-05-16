@@ -34,8 +34,8 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
                 mProduct.setId(productRealm.getId());
                 mProduct.setBarcode(productRealm.getBarcode());
                 mProduct.setName(productRealm.getName());
-                mProduct.setStartPositionBarcodeWight(productRealm.getStartPositionBarcodeWight());
-                mProduct.setFinishPositionBarcodeWight(productRealm.getFinishPositionBarcodeWight());
+                mProduct.setStartPosition(productRealm.getStartPosition());
+                mProduct.setFinishPosition(productRealm.getFinishPosition());
                 mProduct.setCoefficient(productRealm.getCoefficient());
             }
         }
@@ -115,11 +115,11 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
     }
 
     public int getStartPosition() {
-        return mProduct.getStartPositionBarcodeWight();
+        return mProduct.getStartPosition();
     }
 
     public int getFinishPosition() {
-        return mProduct.getFinishPositionBarcodeWight();
+        return mProduct.getFinishPosition();
     }
 
     public float getCoefficient() {
@@ -148,7 +148,7 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
             e.printStackTrace();
         }
 
-        mProduct.setStartPositionBarcodeWight(anInt);
+        mProduct.setStartPosition(anInt);
         refreshView();
 
     }
@@ -162,7 +162,7 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
             e.printStackTrace();
         }
 
-        mProduct.setFinishPositionBarcodeWight(anInt);
+        mProduct.setFinishPosition(anInt);
         refreshView();
     }
 
@@ -183,5 +183,7 @@ public class DetailProductPresenter extends MvpPresenter<DetailProductView> {
         refreshView();
     }
 
-
+    public void showListBarcode() {
+        getViewState().showListBarcode();
+    }
 }

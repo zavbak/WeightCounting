@@ -88,5 +88,11 @@
         android:layout_height="wrap_content"
         android:text="save"/>
 
+    <Button
+        android:id="@+id/btShowListBarcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подсчет"/>
+
 
 </LinearLayout>

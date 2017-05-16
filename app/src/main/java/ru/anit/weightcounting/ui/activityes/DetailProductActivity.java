@@ -53,8 +53,6 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
     TextView tvMessage;
 
 
-
-
     public static Intent getIntent(final Context context,String id) {
         Intent intent = new Intent(context, DetailProductActivity.class);
         intent.putExtra("id",id);
@@ -154,7 +152,10 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
     void onClickBtSave(){
         mPresenter.saveProduct();
     }
-
+    @OnClick(R.id.btShowListBarcode)
+    void onClickBtShowListBarcode(){
+        mPresenter.showListBarcode();
+    }
     @OnClick(R.id.tv_initial_barcode)
     void onClickBarcode(){
         mPresenter.clickBarcode();
@@ -179,8 +180,6 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
     void onClickTvInitialBarcode(){
         mPresenter.clickCoefficient();
     }
-
-
 
     //**********************************************************************************************
     //                              Dilod
@@ -224,6 +223,11 @@ public class DetailProductActivity extends BaseMvpActivity implements DetailProd
                 s -> mPresenter.setInitBarcode(s),() -> {}).create();
 
         alertDialog.show();
+    }
+
+    @Override
+    public void showListBarcode() {
+        startActivity(ListBarcodeActivity.getIntent(this,mPresenter.getId()));
     }
 
     @Override
